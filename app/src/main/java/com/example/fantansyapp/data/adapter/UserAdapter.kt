@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.example.fantansyapp.R
 import com.example.fantansyapp.data.models.User
+import com.example.fantansyapp.databinding.ItemLayoutBinding
 import com.example.mynewsapikt.utils.OnRecyclerViewItemClickListener
 import com.example.mynewsapikt.utils.glideLoadImage
 import kotlinx.android.synthetic.main.fragment_user.view.*
@@ -30,7 +31,7 @@ import kotlinx.coroutines.NonDisposableHandle.parent
 
 class UserAdapter(val Userlist: List<User> , val listener: OnRecyclerViewItemClickListener) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: UserAdapterBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 
         val txtUserProfile: ImageView = binding.root.findViewById(R.id.user_profile)
         val txtUserName: TextView = binding.root.findViewById(R.id.user_name)
@@ -63,7 +64,7 @@ class UserAdapter(val Userlist: List<User> , val listener: OnRecyclerViewItemCli
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAdapter.ViewHolder {
         return ViewHolder(
-            UserAdapterBinding.inflate(
+                ItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context),  /// item_layout
                 parent,
                 false

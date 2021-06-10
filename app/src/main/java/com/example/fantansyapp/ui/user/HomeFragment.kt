@@ -1,15 +1,10 @@
-package com.example.fantansyapp.ui.home
+package com.example.fantansyapp.ui.user
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.fantansyapp.R
 import com.example.fantansyapp.data.reoositiries.UserReposeitory
@@ -18,7 +13,7 @@ import com.example.fantansyapp.databinding.FragmentUserBinding
 import com.example.fantansyapp.utils.snackBar
 
 private const val TAG = "HomeFragment"
-class HomeFragment : Fragment(R.layout.fragment_user) {
+class UserFragment : Fragment(R.layout.fragment_user) {
 
     private val binding: FragmentUserBinding by viewBinding()
     private lateinit var userRepo:UserReposeitory

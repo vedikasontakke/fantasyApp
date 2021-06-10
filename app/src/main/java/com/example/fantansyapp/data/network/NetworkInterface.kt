@@ -1,4 +1,5 @@
 package com.example.fantansyapp.data.network
+import com.example.fantansyapp.data.models.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -6,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 
@@ -27,6 +29,9 @@ interface NetworkInterface {
 
 
 
+    @GET("getUsers")
+    suspend fun getAllUsers(
+    ): Response<ArrayList<User>>
 
     companion object {
         operator fun invoke(

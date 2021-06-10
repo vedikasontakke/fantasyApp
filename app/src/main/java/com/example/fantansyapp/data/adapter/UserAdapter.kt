@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.item_layout.view.*
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.NonDisposableHandle.parent
 
-class UserAdapter(val Userlist: List<User> , val listener: OnRecyclerViewItemClickListener) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter(val Userlist: List<User> /* , val listener: OnRecyclerViewItemClickListener*/) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -45,7 +45,7 @@ class UserAdapter(val Userlist: List<User> , val listener: OnRecyclerViewItemCli
         init {
             UserAdapterParentLinear.setOnClickListener {
 
-                listener.onItemClick(Userlist[adapterPosition].profileImage)
+               // listener.onItemClick(Userlist[adapterPosition].profileImage)
 
             }
         }

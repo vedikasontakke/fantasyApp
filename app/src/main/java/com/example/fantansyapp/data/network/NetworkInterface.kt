@@ -38,8 +38,7 @@ interface NetworkInterface {
             //  networkConnectionInterceptor: NetworkConnectionInterceptor
         ): NetworkInterface {
             //val Server_url = "https://digitdeveloper.online/langar/tesing/send_otp/welcome/";
-             val BASE_URL = "http://localhost:8080/projectsAndroid/earningapi/Welcome/"
-
+             val BASE_URL = "http://192.168.43.227:8080/projectsAndroid/earningapi/Welcome/"
 
             val loginInspector =
                 HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }

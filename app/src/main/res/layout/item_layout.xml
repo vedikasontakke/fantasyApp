@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/card_view_bg">
 
     <RelativeLayout
@@ -18,71 +18,101 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp">
 
-            <TextView
-                android:id="@+id/txt_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/user_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/circle"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="24sp"
-                tools:text="F" />
+                app:cardCornerRadius="48dp"
+                >
+
+                <ImageView
+                    android:layout_width="84dp"
+                    android:layout_height="90dp"
+                    android:gravity="center"
+                    android:src="@drawable/splash" />
+
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/item_text_name"
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@id/txt_icon"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_toStartOf="@id/txt_date"
-                android:layout_toLeftOf="@id/txt_date"
-                android:layout_toEndOf="@id/txt_icon"
-                android:layout_toRightOf="@id/txt_icon"
+                android:layout_alignTop="@id/user_profile"
+                android:layout_marginStart="36dp"
+                android:layout_marginLeft="26dp"
+                android:padding="2dp"
+                android:fontFamily="@font/gilroy_extrabold"
+                android:layout_toEndOf="@id/user_profile"
+                android:layout_toRightOf="@id/user_profile"
+                android:textColor="@color/darkerGray"
+                android:textSize="24sp"
+                tools:text="mrs sharma " />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="70dp"
+                android:src="@drawable/coins"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="39dp"
+                android:layout_alignStart="@id/user_profile"
+                android:padding="2dp"
+                android:layout_alignLeft="@id/user_profile"
+                />
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_name"
+                android:layout_alignStart="@id/user_name"
+                android:layout_alignLeft="@id/user_name"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/circularstd"
+                android:singleLine="true"
+                android:padding="2dp"
+                android:layout_marginTop="-3dp"
                 android:textColor="@color/darkerGray"
                 android:textSize="18sp"
-                tools:text="Facebook" />
+                android:layout_marginStart="5sp"
+                tools:text="abc@gmail.com" />
 
             <TextView
-                android:id="@+id/txt_subject"
-                android:layout_width="match_parent"
+                android:id="@+id/user_coins"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/item_text_name"
-                android:layout_alignStart="@id/item_text_name"
-                android:layout_alignLeft="@id/item_text_name"
+                android:layout_below="@id/user_name"
+                android:layout_alignStart="@id/user_email"
+                android:layout_alignLeft="@id/user_email"
                 android:ellipsize="marquee"
+                android:fontFamily="@font/circularstd"
                 android:singleLine="true"
+                android:padding="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="12dp"
                 android:textColor="@color/darkerGray"
-                android:textSize="16sp"
-                tools:text="Facebook Facebook Facebook Facebook Facebook Facebook Facebook Facebook Facebook Facebook Facebook Facebook" />
+                android:textSize="18sp"
+                tools:text="10" />
 
 
             <TextView
-                android:id="@+id/txt_preview"
+                android:id="@+id/user_plan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txt_subject"
-                android:layout_alignStart="@id/item_text_name"
-                android:layout_alignLeft="@id/item_text_name"
+                android:layout_below="@id/user_email"
+                android:layout_alignStart="@id/user_name"
+                android:layout_alignLeft="@id/user_name"
                 android:layout_marginEnd="24dp"
                 android:layout_marginRight="24dp"
                 android:ellipsize="marquee"
+                android:padding="5dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/circularstd"
                 android:singleLine="true"
                 android:textColor="@color/darkerGray"
                 android:textSize="16sp"
-                tools:text="Preview Preview" />
-
-            <TextView
-                android:id="@+id/txt_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:ellipsize="marquee"
-                android:singleLine="true"
-                android:textColor="@color/darkerGray"
-                tools:text="20 min" />
+                tools:text="SIMPLE" />
 
 
         </RelativeLayout>

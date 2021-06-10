@@ -29,7 +29,7 @@ interface NetworkInterface {
 
 
 
-    @GET("getUsers")
+    @GET("getAllUsers")
     suspend fun getAllUsers(
     ): Response<ArrayList<User>>
 

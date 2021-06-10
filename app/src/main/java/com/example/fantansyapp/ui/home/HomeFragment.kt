@@ -13,13 +13,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.fantansyapp.R
 import com.example.fantansyapp.data.reoositiries.UserReposeitory
-import com.example.fantansyapp.databinding.FragmentHomeBinding
+import com.example.fantansyapp.databinding.FragmentUserBinding
+
 import com.example.fantansyapp.utils.snackBar
 
 private const val TAG = "HomeFragment"
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_user) {
 
-    private val binding:FragmentHomeBinding by viewBinding()
+    private val binding: FragmentUserBinding by viewBinding()
     private lateinit var userRepo:UserReposeitory
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,3 +51,4 @@ class HomeFragment : Fragment() {
         }
     }
 }
+

@@ -1,4 +1,4 @@
-package com.example.fantansyapp.retrofit
+package com.example.fantansyapp.data.models
 
 data class userModelClass (
 

@@ -47,7 +47,6 @@
                     android:textSize="20sp"
                     tools:text="Parth Tagalpallewar" />
 
-
                 <TextView
                     android:id="@+id/email"
                     android:layout_width="wrap_content"

@@ -1,7 +1,6 @@
 package com.example.fantansyapp.data.models
 
 import android.os.Parcelable
-import com.example.fantansyapp.utils.Constants.Companion.IMAGE_URL
 import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class User(
@@ -15,7 +14,7 @@ data class User(
         val paymentMethod: String,
         val paymentId: String,
         val profileImage: String,
-        val coins: Int,
+        val coins: String,
         val accountType: String,
         val planPurchaseDate: String,
         val yourFriendSponserId: String?,

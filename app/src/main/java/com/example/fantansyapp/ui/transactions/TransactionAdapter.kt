@@ -14,7 +14,7 @@ class TransactionAdapter(private val transactionDataList: ArrayList<Transaction>
 
         init {
             //if user click row
-            binding.donebtn.setOnClickListener {
+            binding.root.setOnClickListener {
 
                 if (adapterPosition != RecyclerView.NO_POSITION){
                     clickListener.clickListener(transactionDataList[adapterPosition])

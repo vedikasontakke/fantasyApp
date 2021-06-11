@@ -3,7 +3,6 @@ package com.example.fantansyapp.data.repositories
 import android.content.Context
 import com.example.fantansyapp.data.models.Result
 import com.example.fantansyapp.data.models.Transaction
-import com.example.fantansyapp.data.models.User
 import com.example.fantansyapp.data.network.NetworkInterface
 import com.example.fantansyapp.data.network.SafeApiRequest
 import kotlinx.coroutines.Dispatchers

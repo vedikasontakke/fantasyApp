@@ -21,7 +21,6 @@ import com.example.fantansyapp.utils.visible
 import kotlinx.coroutines.launch
 
 private const val TAG = "HomeFragment"
-
 class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClickListener {
 
     private val binding: FragmentUserBinding by viewBinding()

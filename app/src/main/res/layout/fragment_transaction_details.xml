@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.userDetails.UserDetailsFragment">
 
+
     <ScrollView
-        android:layout_above="@+id/buttonsLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonsLinearLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,13 +20,13 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImage"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="5dp"
-                android:src="@drawable/splash"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp" />
+                android:src="@drawable/splash" />
 
             <LinearLayout
                 android:id="@+id/contentLinearLayout"
@@ -34,7 +35,7 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <EditText
+                <TextView
                     android:id="@+id/name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -88,7 +89,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/insta"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -129,7 +130,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/phone"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -171,7 +172,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/paymentMethod"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -213,7 +214,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/paymentId"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -261,7 +262,7 @@
                         android:src="@drawable/ic_coin" />
 
 
-                    <EditText
+                    <TextView
                         android:id="@+id/coins"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -304,7 +305,7 @@
                         android:textSize="16sp" />
 
 
-                    <EditText
+                    <TextView
                         android:id="@+id/accountType"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -343,7 +344,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/planPurchaseDate"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -381,7 +382,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/plan"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -419,7 +420,7 @@
                         android:singleLine="true"
                         android:textSize="16sp" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/planExpDate"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
@@ -447,40 +448,26 @@
         android:id="@+id/buttonsLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="2"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <Button
-            android:id="@+id/deleteButton"
+            android:id="@+id/doneButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="@drawable/button_primary"
             android:drawablePadding="8dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
             android:fontFamily="@font/circularstd"
             android:gravity="center"
             android:padding="10dp"
             android:singleLine="true"
-            android:text="DELELTE"
+            android:text="MARK AS DONE"
             android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/updateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_primary"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:singleLine="true"
-            android:text="UPDATE"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
     </LinearLayout>
 </RelativeLayout>
+

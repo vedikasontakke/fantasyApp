@@ -137,7 +137,7 @@ inline fun View.snackBar(
         setView(this@snackBar)
         setMaxLines(4)
         setActionTextColor(Color.parseColor("#FFFFFF"))
-        setActionTextSize(18F)
+        setActionTextSize(14F)
         setActionTextTypefaceStyle(Typeface.BOLD)
         setDuration(ChocoBar.LENGTH_LONG)
     }

@@ -19,13 +19,17 @@
         android:id="@+id/navigation_transactions"
         android:name="com.example.fantansyapp.ui.transactions.TransactionsFragment"
         android:label="@string/title_transactions"
-        tools:layout="@layout/fragment_transaction" />
+        tools:layout="@layout/fragment_transaction" >
+        <action
+            android:id="@+id/action_navigation_transactions_to_transactionDetailsFragment"
+            app:destination="@id/transactionDetailsFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.fantansyapp.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_settings"
+        android:name="com.example.fantansyapp.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.example.fantansyapp.ui.userDetails.UserDetailsFragment"
@@ -35,4 +39,20 @@
             android:name="bundleUserDetails"
             app:argType="com.example.fantansyapp.data.models.User" />
     </fragment>
+    <fragment
+        android:id="@+id/transactionDetailsFragment"
+        android:name="com.example.fantansyapp.ui.transactionDetails.TransactionDetailsFragment"
+        android:label="fragment_transaction_details"
+        tools:layout="@layout/fragment_transaction_details" >
+        <argument
+            android:name="bundleEmail"
+            app:argType="string" />
+        <argument
+            android:name="BundelTransactonId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_uploads"
+        android:name="com.example.fantansyapp.ui.image.SliderFragment"
+        android:label="@string/title_Uploads" />
 </navigation>

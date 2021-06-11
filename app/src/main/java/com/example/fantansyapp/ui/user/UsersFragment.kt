@@ -69,7 +69,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
     override fun clickListener(user: User) {
 
         if (findNavController().currentDestination?.id == R.id.navigation_user) {
-            UserFragmentDirections.actionNavigationUserToUserDetailsFragment(user).apply {
+            UsersFragmentDirections.actionNavigationUserToUserDetailsFragment(user).apply {
                 findNavController().navigate(this)
             }
         }

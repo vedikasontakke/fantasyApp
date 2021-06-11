@@ -7,19 +7,32 @@
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.example.fantansyapp.ui.user.UserFragment"
+        android:name="com.example.fantansyapp.ui.user.UsersFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_navigation_user_to_userDetailsFragment"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.fantansyapp.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_transactions"
+        android:name="com.example.fantansyapp.ui.transactions.TransactionsFragment"
+        android:label="@string/title_transactions"
+        tools:layout="@layout/fragment_transaction" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.fantansyapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/userDetailsFragment"
+        android:name="com.example.fantansyapp.ui.userDetails.UserDetailsFragment"
+        android:label="fragment_user_details"
+        tools:layout="@layout/fragment_user_details" >
+        <argument
+            android:name="bundleUserDetails"
+            app:argType="com.example.fantansyapp.data.models.User" />
+    </fragment>
 </navigation>

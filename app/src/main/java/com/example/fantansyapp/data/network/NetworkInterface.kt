@@ -1,14 +1,13 @@
 package com.example.fantansyapp.data.network
+import com.example.fantansyapp.data.models.Result
+import com.example.fantansyapp.data.models.Transaction
 import com.example.fantansyapp.data.models.User
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 interface NetworkInterface {
@@ -33,12 +32,38 @@ interface NetworkInterface {
     suspend fun getAllUsers(
     ): Response<ArrayList<User>>
 
+    @GET("getUserByEmail")
+    suspend fun getSingleUser(
+            @Query("email")email:String
+    ): Response<User>
+
+    @GET("getAllUnpaidTransactions")
+    suspend fun getAllTransactions(
+    ): Response<ArrayList<Transaction>>
+
+    @GET("makeTransactionDone")
+    suspend fun makeTractionCompleted(
+            @Query("transactionId")id:String
+    ): Response<Result>
+
+    @FormUrlEncoded
+    @POST("searchUsersByEmail")
+    suspend fun searchUsersByName(
+            @Field("email")email: String,
+            @Field("name")name:String
+    ): Response<ArrayList<User>>
+
+
+
     companion object {
         operator fun invoke(
             //  networkConnectionInterceptor: NetworkConnectionInterceptor
         ): NetworkInterface {
-            //val Server_url = "https://digitdeveloper.online/langar/tesing/send_otp/welcome/";
-             val BASE_URL = "http://192.168.43.227:8080/projectsAndroid/earningapi/Welcome/"
+            //vedika
+             //val BASE_URL = "http://192.168.43.227:8080/projectsAndroid/earningapi/Welcome/"
+
+            //parth
+            val BASE_URL = "http://192.168.43.146/Learing/earning_app/Welcome/"
 
             val loginInspector =
                 HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }

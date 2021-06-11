@@ -14,12 +14,14 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
+import com.bumptech.glide.Glide
 import com.example.fantansyapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pd.chocobar.ChocoBar
@@ -29,6 +31,10 @@ fun BottomNavigationView.visiblity(boolean: Boolean) {
         View.VISIBLE
     else
         View.GONE
+}
+
+fun ImageView.setGlideImage(ctx:Context,uri:String){
+    Glide.with(ctx).load(uri).into(this     )
 }
 
 inline fun EditText.search(crossinline work: (query: String) -> Unit) {

@@ -29,5 +29,15 @@
         android:textColor="@color/white"
         android:textSize="13sp" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_slider"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="141dp"
+        android:theme="@style/progressColor"
+        android:visibility="invisible" />
+
 
 </RelativeLayout>

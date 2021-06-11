@@ -45,7 +45,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
     private fun getAllUser() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-            binding.progressBar.visible(true)
+            binding.progressBarUser.visible(true)
             try {
                 val usersList = userRepo.getAllUsers()
 
@@ -53,7 +53,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
             } catch (e: Exception) {
                 requireView().snackBar(e.stackTraceToString())
                 Log.e(TAG, "getAllUser: ${e.printStackTrace()}")
-                binding.progressBar.visible(false)
+                binding.progressBarUser.visible(false)
             }
 
         }
@@ -62,7 +62,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
     private fun showDataInRecyclerView(usersList: ArrayList<User>) {
         val mAdapter = UsersAdapter(usersList, this@UsersFragment)
         binding.recyclerView.adapter = mAdapter
-        binding.progressBar.visible(false)
+        binding.progressBarUser.visible(false)
     }
 
     override fun clickListener(user: User) {

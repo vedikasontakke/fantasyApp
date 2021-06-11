@@ -12,6 +12,7 @@ import com.example.fantansyapp.data.models.User
 import com.example.fantansyapp.data.repositories.UserRepository
 import com.example.fantansyapp.databinding.FragmentUserDetailsBinding
 import com.example.fantansyapp.utils.snackBar
+import com.example.fantansyapp.utils.visible
 import kotlinx.coroutines.launch
 
 private const val TAG = "UserDetailsFragment"
@@ -89,30 +90,47 @@ class UserDetailsFragment : Fragment(R.layout.fragment_user_details) {
 
     private fun updateDetails(user: User) {
         viewLifecycleOwner.lifecycleScope.launch {
+
+            binding.progressBarUserdetails.visible(true)
+
             try {
 
                 val result = UserRepository(requireContext()).updateSingleUser(user)
                 if (result.result == "success") {
                     requireView().snackBar("User Data Updated Successfully")
                 }
+
+                binding.progressBarUserdetails.visible(false)
+
             } catch (e: Exception) {
                 requireView().snackBar(e.localizedMessage.toString())
+                binding.progressBarUserdetails.visible(false)
+
             }
         }
     }
 
     private fun deleteUser(email: String) {
         viewLifecycleOwner.lifecycleScope.launch {
+
+            binding.progressBarUserdetails.visible(true)
+
             try {
 
                 val result = UserRepository(requireContext()).deleteUser(email)
                 if (result.result == "User Deleted Successfully") {
                     requireView().snackBar("User Deleted Successfully")
 
+                    binding.progressBarUserdetails.visible(false)
+
+
                     findNavController().popBackStack()
                 }
             } catch (e: Exception) {
                 requireView().snackBar(e.localizedMessage.toString())
+
+                binding.progressBarUserdetails.visible(false)
+
             }
         }
     }

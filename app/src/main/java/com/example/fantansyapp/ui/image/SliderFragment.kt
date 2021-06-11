@@ -11,6 +11,7 @@ import com.example.fantansyapp.R
 import com.example.fantansyapp.data.repositories.LimitsRepository
 import com.example.fantansyapp.databinding.FragmentSliderBinding
 import com.example.fantansyapp.utils.snackBar
+import com.example.fantansyapp.utils.visible
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -46,14 +47,23 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
 
     private fun uploadImage() {
         viewLifecycleOwner.lifecycleScope.launch {
+
+            binding.progressBarSlider.visible(true)
+
             try {
                 val result = LimitsRepository(requireContext()).uploadSliderImage(body!!)
                 if (result.result == "success") {
                     requireView().snackBar("Image Uploaded Successfully")
                     binding.image.setImageURI(null)
                 }
+
+                binding.progressBarSlider.visible(false)
+
             } catch (e: Exception) {
                 requireView().snackBar(e.message.toString())
+
+                binding.progressBarSlider.visible(false)
+
             }
 
         }
@@ -67,6 +77,10 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        binding.progressBarSlider.visible(true)
+
+
         if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
             try {
                 data?.let {
@@ -80,8 +94,14 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
 
                     }
                 }
+
+                binding.progressBarSlider.visible(false)
+
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
+
+                binding.progressBarSlider.visible(false)
+
             }
         }
     }

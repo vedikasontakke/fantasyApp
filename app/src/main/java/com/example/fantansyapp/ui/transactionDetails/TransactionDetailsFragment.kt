@@ -13,6 +13,7 @@ import com.example.fantansyapp.data.repositories.TransactionRepo
 import com.example.fantansyapp.data.repositories.UserRepository
 import com.example.fantansyapp.databinding.FragmentTransactionDetailsBinding
 import com.example.fantansyapp.utils.snackBar
+import com.example.fantansyapp.utils.visible
 import kotlinx.android.synthetic.main.fragment_transaction_details.*
 import kotlinx.coroutines.launch
 
@@ -35,7 +36,8 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
 
     private fun getUserByEmail() {
         viewLifecycleOwner.lifecycleScope.launch {
-            //show progress bar
+            binding.progressBarTransitionDetail.visible(true)
+
             try {
                 val user = UserRepository(requireContext()).getSingleUser(userEmail)
 
@@ -44,26 +46,30 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
 
                     Glide.with(requireView()).load(user.getImage).into(profileImage)
                     email.text = user.email
-                    name.setText(user.name)
-                    phone.setText(user.phone)
-                    insta.setText(user.instagramAccountId)
-                    paymentMethod.setText(user.paymentMethod)
-                    paymentId.setText(user.paymentId)
-                    coins.setText(user.coins.toString())
-                    accountType.setText(user.accountType)
-                    planPurchaseDate.setText(user.planPurchaseDate)
-                    plan.setText(user.plan)
-                    planExpDate.setText(user.planExpDate)
+                    name.text = user.name
+                    phone.text = user.phone
+                    insta.text = user.instagramAccountId
+                    paymentMethod.text = user.paymentMethod
+                    paymentId.text = user.paymentId
+                    coins.text = user.coins.toString()
+                    accountType.text = user.accountType
+                    planPurchaseDate.text = user.planPurchaseDate
+                    plan.text = user.plan
+                    planExpDate.text = user.planExpDate
                 }
 
                 doneButton.setOnClickListener {
                     makeTransactionDone()
                 }
 
+                binding.progressBarTransitionDetail.visible(false)
 
 
             } catch (e: Exception) {
                 requireView().snackBar(e.message.toString())
+
+                binding.progressBarTransitionDetail.visible(false)
+
             }
 
 
@@ -80,7 +86,7 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
     private fun makeTransactionDone(){
       viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-          //binding.progressBar.visible(true)
+          binding.progressBarTransitionDetail.visible(true)
           try {
               val result = TransactionRepo(requireContext()).makeTransactionDone(transactionId)
 
@@ -88,11 +94,13 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
                  findNavController().popBackStack()
               }
 
+              binding.progressBarTransitionDetail.visible(false)
+
 
           } catch (e: Exception) {
               requireView().snackBar(e.stackTraceToString())
               Log.e(TAG, "getAllUser: ${e.printStackTrace()}", )
-             // binding.progressBar.visible(false)
+              binding.progressBarTransitionDetail.visible(false)
           }
 
       }

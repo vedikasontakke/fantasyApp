@@ -40,17 +40,17 @@ class TransactionsFragment : Fragment(R.layout.fragment_transaction),Transaction
     private fun getAllTransactions() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
 
-            binding.progressBar.visible(true)
+            binding.progressBarTransition.visible(true)
             try {
                 val transactionsList = transRepo.getAllTransaction()
 
                 val mAdapter = TransactionAdapter(transactionsList, this@TransactionsFragment)
                 binding.recyclerView.adapter = mAdapter
-                binding.progressBar.visible(false)
+                binding.progressBarTransition.visible(false)
             } catch (e: Exception) {
                 requireView().snackBar(e.stackTraceToString())
                 Log.e(TAG, "getAllUser: ${e.printStackTrace()}", )
-                binding.progressBar.visible(false)
+                binding.progressBarTransition.visible(false)
             }
 
         }

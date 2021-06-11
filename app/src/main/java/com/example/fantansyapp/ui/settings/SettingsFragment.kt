@@ -10,6 +10,7 @@ import com.example.fantansyapp.data.models.Limit
 import com.example.fantansyapp.data.repositories.LimitsRepository
 import com.example.fantansyapp.databinding.FragmentSettingsBinding
 import com.example.fantansyapp.utils.snackBar
+import com.example.fantansyapp.utils.visible
 import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -42,6 +43,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun updateLimits() {
         viewLifecycleOwner.lifecycleScope.launch {
+
+            binding.progressBarSetting.visible(true)
+
             try {
 
 
@@ -61,11 +65,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                     if(result.result == "success"){
                         requireView().snackBar("Data Updated Successfully")
                     }
+
+                    binding.progressBarSetting.visible(false)
+
                 }else{
                     requireView().snackBar("Can not find data to Update")
+
+                    binding.progressBarSetting.visible(false)
+
                 }
             } catch (e: Exception) {
                 requireView().snackBar(e.message.toString())
+
+                binding.progressBarSetting.visible(false)
+
             }
         }
     }

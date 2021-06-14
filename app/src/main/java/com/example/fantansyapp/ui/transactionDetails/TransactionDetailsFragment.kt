@@ -13,6 +13,7 @@ import com.example.fantansyapp.data.repositories.TransactionRepo
 import com.example.fantansyapp.data.repositories.UserRepository
 import com.example.fantansyapp.databinding.FragmentTransactionDetailsBinding
 import com.example.fantansyapp.utils.snackBar
+import com.example.fantansyapp.utils.toast
 import com.example.fantansyapp.utils.visible
 import kotlinx.android.synthetic.main.fragment_transaction_details.*
 import kotlinx.coroutines.launch
@@ -32,10 +33,23 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
 
         getUserByEmail()
 
+        binding.history.setOnClickListener {
+
+            navigateToHistory()
+
+        }
+
+    }
+
+    private fun navigateToHistory() {
+        TransactionDetailsFragmentDirections.actionTransactionDetailsFragmentToHistoryFragment(userEmail).apply {
+            findNavController().navigate(this)
+        }
     }
 
     private fun getUserByEmail() {
         viewLifecycleOwner.lifecycleScope.launch {
+            
             binding.progressBarTransitionDetail.visible(true)
 
             try {
@@ -45,30 +59,46 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
                 binding.apply {
 
                     Glide.with(requireView()).load(user.getImage).into(profileImage)
-                    email.text = user.email
-                    name.text = user.name
-                    phone.text = user.phone
-                    insta.text = user.instagramAccountId
-                    paymentMethod.text = user.paymentMethod
-                    paymentId.text = user.paymentId
-                    coins.text = user.coins.toString()
-                    accountType.text = user.accountType
-                    planPurchaseDate.text = user.planPurchaseDate
-                    plan.text = user.plan
-                    planExpDate.text = user.planExpDate
+                    email.setText( user.email)
+                    name.setText( user.name)
+                    phone.setText( user.phone)
+                    insta.setText( user.instagramAccountId)
+                    paymentMethod.setText( user.paymentMethod)
+                    paymentId.setText( user.paymentId)
+                    coins.setText( user.coins.toString())
+                    accountType.setText( user.accountType)
+                    planPurchaseDate.setText( user.planPurchaseDate)
+                    plan.setText( user.plan)
+                    planExpDate.setText( user.planExpDate)
                 }
 
                 doneButton.setOnClickListener {
                     makeTransactionDone()
                 }
 
+                denyButton.setOnClickListener {
+                    denyTransaction()
+                }
+
                 binding.progressBarTransitionDetail.visible(false)
 
 
             } catch (e: Exception) {
-                requireView().snackBar(e.message.toString())
 
-                binding.progressBarTransitionDetail.visible(false)
+
+
+                try {
+
+                    if (e is UninitializedPropertyAccessException){
+                        binding.root.snackBar("Please Wait fetching Data")
+                        binding.progressBarTransitionDetail.visible(false)
+                    }
+
+                    binding.root.snackBar(e.message.toString())
+
+                    binding.progressBarTransitionDetail.visible(false)
+                } catch (e: Exception) {
+                }
 
             }
 
@@ -79,6 +109,15 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
     private fun initData() {
         val bundleEmail = requireArguments().getString("bundleEmail")
         val bundleTid = requireArguments().getString("BundelTransactonId")
+        val paymentStatus = requireArguments().getString("bundlePaymentStatus")
+
+
+        if (paymentStatus!!.equals("PAID") or paymentStatus.equals("REJECTED")){
+            binding.buttonsLinearLayout.visibility = View.GONE
+        }else{
+            binding.buttonsLinearLayout.visibility = View.VISIBLE
+        }
+
         userEmail = bundleEmail!!
         transactionId = bundleTid!!
     }
@@ -98,11 +137,35 @@ class TransactionDetailsFragment: Fragment(R.layout.fragment_transaction_details
 
 
           } catch (e: Exception) {
-              requireView().snackBar(e.stackTraceToString())
+              binding.root.snackBar(e.stackTraceToString())
               Log.e(TAG, "getAllUser: ${e.printStackTrace()}", )
               binding.progressBarTransitionDetail.visible(false)
           }
 
       }
+    }
+
+
+    private fun denyTransaction(){
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+
+            binding.progressBarTransitionDetail.visible(true)
+            try {
+                val result = TransactionRepo(requireContext()).denyTransaction(transactionId)
+
+                if (result.result == "data updated successfully"){
+                    findNavController().popBackStack()
+                }
+
+                binding.progressBarTransitionDetail.visible(false)
+
+
+            } catch (e: Exception) {
+                binding.root.snackBar(e.stackTraceToString())
+
+                binding.progressBarTransitionDetail.visible(false)
+            }
+
+        }
     }
 }

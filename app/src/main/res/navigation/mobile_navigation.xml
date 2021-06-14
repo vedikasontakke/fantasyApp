@@ -38,6 +38,9 @@
         <argument
             android:name="bundleUserDetails"
             app:argType="com.example.fantansyapp.data.models.User" />
+        <action
+            android:id="@+id/action_userDetailsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/transactionDetailsFragment"
@@ -50,9 +53,34 @@
         <argument
             android:name="BundelTransactonId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_transactionDetailsFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+        <argument android:name="bundlePaymentStatus" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.fantansyapp.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <argument
+            android:name="bundleEmail"
+            app:argType="string" />
     </fragment>
     <fragment
+        android:id="@+id/navigation_all_slides"
+        android:name="com.example.fantansyapp.ui.allSlides.AllSlides"
+        android:label="@string/title_Uploads"
+        tools:layout="@layout/fragment_all_slides" >
+        <action
+            android:id="@+id/action_navigation_all_slides_to_navigation_uploads"
+            app:destination="@id/navigation_uploads" />
+    </fragment>
+
+    <fragment
         android:id="@+id/navigation_uploads"
-        android:name="com.example.fantansyapp.ui.image.SliderFragment"
-        android:label="@string/title_Uploads" />
+        android:name="com.example.fantansyapp.ui.addSlide.AddSlide"
+        android:label="@string/title_Uploads"
+        tools:layout="@layout/fragment_slider"/>
 </navigation>

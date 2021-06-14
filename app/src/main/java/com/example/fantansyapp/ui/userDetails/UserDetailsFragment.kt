@@ -1,11 +1,17 @@
 package com.example.fantansyapp.ui.userDetails
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.fantansyapp.R
 import com.example.fantansyapp.data.models.User
@@ -31,6 +37,7 @@ class UserDetailsFragment : Fragment(R.layout.fragment_user_details) {
         super.onViewCreated(view, savedInstanceState)
 
         initData()
+
 
 
     }
@@ -59,51 +66,103 @@ class UserDetailsFragment : Fragment(R.layout.fragment_user_details) {
             plan.setText(user.plan)
             planExpDate.setText(user.planExpDate)
 
+
             updateButton.setOnClickListener {
 
-                val dataToUpdate = user.copy(
-                    name = (binding.name.text.toString()),
-                    email = (binding.email.text.toString()),
-                    phone = (binding.phone.text.toString()),
-                    instagramAccountId = (binding.insta.text.toString()),
-                    paymentMethod = (binding.paymentMethod.text.toString()),
-                    paymentId = (binding.paymentId.text.toString()),
-                    coins = (binding.coins.text.toString()),
-                    accountType = (binding.accountType.text.toString()),
-                    planPurchaseDate = (binding.planPurchaseDate.text.toString()),
-                    plan = (binding.plan.text.toString()),
-                    planExpDate = (binding.planExpDate.text.toString())
-                )
+                AlertDialog.Builder(requireContext()).apply {
+                    setTitle("Update ${user.name}")
+                    setMessage("Do your really want to Update user")
+                    setPositiveButton("Yes") { dialog, _ ->
+                        updateDetails()
+                        dialog.cancel()
+                    }
+                    setNegativeButton("No") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    create()
+                    show()
+                }
 
-                updateDetails(dataToUpdate)
 
-            }
 
-            deleteButton.setOnClickListener {
-                deleteUser(user.email)
             }
 
         }
 
+        (requireContext() as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        setHasOptionsMenu(true)
 
     }
 
-    private fun updateDetails(user: User) {
+    private fun showDelteAlertDialog() {
+        AlertDialog.Builder(requireContext()).apply {
+            setTitle("Delete ${user.name}")
+            setMessage("Do your really want to delete ${user.email}")
+            setPositiveButton("Yes") { dialog, _ ->
+                deleteUser(user.email)
+                dialog.cancel()
+            }
+            setNegativeButton("No") { dialog, _ ->
+                dialog.cancel()
+            }
+            create()
+            show()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.user_operation, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.action_delete){
+            showDelteAlertDialog()
+        }else if(item.itemId == R.id.action_show_history){
+            navigateToHistory()
+        }else{
+
+        }
+        return true
+
+
+    }
+
+    private fun updateDetails() {
+
+        val dataToUpdate = user.copy(
+                name = (binding.name.text.toString()),
+                email = (binding.email.text.toString()),
+                phone = (binding.phone.text.toString()),
+                instagramAccountId = (binding.insta.text.toString()),
+                paymentMethod = (binding.paymentMethod.text.toString()),
+                paymentId = (binding.paymentId.text.toString()),
+                coins = (binding.coins.text.toString()),
+                accountType = (binding.accountType.text.toString()),
+                planPurchaseDate = (binding.planPurchaseDate.text.toString()),
+                plan = (binding.plan.text.toString()),
+                planExpDate = (binding.planExpDate.text.toString())
+        )
+
+
+
         viewLifecycleOwner.lifecycleScope.launch {
 
             binding.progressBarUserdetails.visible(true)
 
             try {
 
-                val result = UserRepository(requireContext()).updateSingleUser(user)
+                val result = UserRepository(requireContext()).updateSingleUser(dataToUpdate)
                 if (result.result == "success") {
-                    requireView().snackBar("User Data Updated Successfully")
+                    binding.root.snackBar("User Data Updated Successfully")
                 }
 
                 binding.progressBarUserdetails.visible(false)
 
             } catch (e: Exception) {
-                requireView().snackBar(e.localizedMessage.toString())
+                binding.root.snackBar(e.localizedMessage.toString())
                 binding.progressBarUserdetails.visible(false)
 
             }
@@ -119,7 +178,7 @@ class UserDetailsFragment : Fragment(R.layout.fragment_user_details) {
 
                 val result = UserRepository(requireContext()).deleteUser(email)
                 if (result.result == "User Deleted Successfully") {
-                    requireView().snackBar("User Deleted Successfully")
+                    binding.root.snackBar("User Deleted Successfully")
 
                     binding.progressBarUserdetails.visible(false)
 
@@ -127,9 +186,28 @@ class UserDetailsFragment : Fragment(R.layout.fragment_user_details) {
                     findNavController().popBackStack()
                 }
             } catch (e: Exception) {
-                requireView().snackBar(e.localizedMessage.toString())
+                binding.root.snackBar(e.localizedMessage.toString())
 
                 binding.progressBarUserdetails.visible(false)
+
+            }
+        }
+    }
+
+    private fun navigateToHistory(){
+        try {
+            UserDetailsFragmentDirections.actionUserDetailsFragmentToHistoryFragment(user.email).apply {
+                findNavController().navigate(this)
+            }
+        } catch (e: Exception) {
+
+            try {
+                if (e is UninitializedPropertyAccessException){
+                    binding.root.snackBar("Pleas Wait fetching data")
+                }else{
+                    binding.root.snackBar(e.message.toString())
+                }
+            }catch (e:Exception){
 
             }
         }

@@ -17,7 +17,7 @@
         android:title="@string/title_settings" />
 
     <item
-        android:id="@+id/navigation_uploads"
+        android:id="@+id/navigation_all_slides"
         android:icon="@drawable/ic_baseline_file_upload_24"
         android:title="@string/title_Uploads"/>
 

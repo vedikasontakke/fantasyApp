@@ -1,6 +1,7 @@
 package com.example.fantansyapp.data.repositories
 
 import android.content.Context
+import com.example.fantansyapp.data.models.History
 import com.example.fantansyapp.data.models.Result
 import com.example.fantansyapp.data.models.User
 import com.example.fantansyapp.data.network.NetworkInterface
@@ -13,6 +14,12 @@ class UserRepository(val context: Context) : SafeApiRequest() {
     suspend fun getAllUsers(): ArrayList<User> {
         return withContext(Dispatchers.IO) {
             apiRequest { NetworkInterface.invoke().getAllUsers() }
+        }
+    }
+
+    suspend fun getAllUserAccordingToCoins(): ArrayList<User> {
+        return withContext(Dispatchers.IO) {
+            apiRequest { NetworkInterface.invoke().getAllUserAccordingToCoins() }
         }
     }
 
@@ -29,6 +36,12 @@ class UserRepository(val context: Context) : SafeApiRequest() {
         }
     }
 
+    suspend fun getHistoryByGmail(email: String): ArrayList<History> {
+        return withContext(Dispatchers.IO) {
+            apiRequest { NetworkInterface.invoke().getHistoryByGmail(email) }
+        }
+    }
+
     suspend fun deleteUser(email: String): Result {
         return withContext(Dispatchers.IO) {
             apiRequest { NetworkInterface.invoke().deleteUser(email) }
@@ -36,22 +49,22 @@ class UserRepository(val context: Context) : SafeApiRequest() {
     }
 
     suspend fun updateSingleUser(
-        user: User
+            user: User
     ): Result {
         return withContext(Dispatchers.IO) {
             apiRequest {
                 NetworkInterface.invoke().updateUserDetails(
-                    name = user.name,
-                    email = user.email,
-                    phone = user.phone,
-                    paymentMethod = user.paymentMethod,
-                    paymentId = user.paymentId,
-                    coins = user.coins.toString(),
-                    accountType = user.accountType,
-                    planPurchaseDate = user.planPurchaseDate,
-                    instagramAccountId = user.instagramAccountId.toString(),
-                    plan = user.plan,
-                    planExpDate = user.planExpDate,
+                        name = user.name,
+                        email = user.email,
+                        phone = user.phone,
+                        paymentMethod = user.paymentMethod,
+                        paymentId = user.paymentId,
+                        coins = user.coins.toString(),
+                        accountType = user.accountType,
+                        planPurchaseDate = user.planPurchaseDate,
+                        instagramAccountId = user.instagramAccountId.toString(),
+                        plan = user.plan,
+                        planExpDate = user.planExpDate,
                 )
             }
         }

@@ -1,5 +1,6 @@
 package com.example.fantansyapp.ui.user
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,8 @@ class UsersAdapter(private var userDataList: ArrayList<User>, private val clickL
                 coins.text = user.coins.toString()
                 plan.text = user.plan
                 profileImage.setGlideImage(binding.root.context,user.getImage)
+
+                Log.e("TAG", "bindData:  ${user.getImage} ")
             }
 
         }

@@ -11,5 +11,8 @@
     <color name="darkerGray">#FF444444</color>
     <color name="color_primary">#de6e71</color>
 
+    <color name="IncrementCoin">#17AE17</color>
+    <color name="DecrementCoin">#F44336</color>
+
 
 </resources>

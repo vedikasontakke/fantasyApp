@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.userDetails.UserDetailsFragment">
 
 
@@ -17,16 +17,47 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="5dp"
-                android:src="@drawable/splash" />
+                <RelativeLayout
+                    android:id="@+id/history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp">
+
+                    <ImageView
+                        android:id="@+id/coinImag"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_coin" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/coinImag"
+                        android:layout_marginTop="2dp"
+                        android:text="HISTORY" />
+                </RelativeLayout>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/splash"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="2dp" />
+
+
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:id="@+id/contentLinearLayout"
@@ -35,40 +66,80 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/name"
-                    android:layout_width="fill_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="0dp"
-                    android:background="@android:color/transparent"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="@font/circularstd"
-                    android:gravity="center_vertical"
-                    android:hint="Full Name"
-                    android:inputType="textCapWords"
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:text="Anagha Shaha"
-                    android:textSize="16sp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/email"
-                    android:layout_width="fill_parent"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/circularstd"
+                        android:gravity="center_vertical"
+                        android:hint="Name : "
+                        android:inputType="textCapWords"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
+                        android:background="@android:color/transparent"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="@font/circularstd"
+                        android:gravity="center_vertical"
+                        android:hint="Full Name"
+                        android:inputType="textCapWords"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:text="Anagha Shaha"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="0dp"
-                    android:background="@android:color/transparent"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="@font/circularstd"
-                    android:gravity="center_vertical"
-                    android:hint="Email"
-                    android:inputType="textCapWords"
+                    android:orientation="horizontal">
 
-                    android:padding="8dp"
-                    android:singleLine="true"
-                    android:text="anaghashaha@gmail.com"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@android:color/transparent"
+                        android:fontFamily="@font/circularstd"
+                        android:gravity="center_vertical"
+                        android:hint="Email : "
+                        android:inputType="textCapWords"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/email"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="0dp"
+                        android:background="@android:color/transparent"
+                        android:drawablePadding="8dp"
+                        android:fontFamily="@font/circularstd"
+                        android:gravity="center_vertical"
+                        android:hint="Email"
+                        android:inputType="textCapWords"
+                        android:padding="8dp"
+                        android:singleLine="true"
+                        android:text="anaghashaha@gmail.com"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -141,7 +212,6 @@
                         android:fontFamily="@font/circularstd"
                         android:gravity="center_vertical"
                         android:hint="phone no"
-
                         android:inputType="textCapWords"
                         android:padding="8dp"
                         android:singleLine="true"
@@ -165,7 +235,6 @@
                         android:drawablePadding="8dp"
                         android:fontFamily="@font/circularstd"
                         android:gravity="center_vertical"
-
                         android:hint="Payment Method :"
                         android:inputType="textCapWords"
                         android:padding="8dp"
@@ -449,8 +518,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/doneButton"
@@ -468,14 +536,30 @@
             android:textColor="@color/white"
             android:textSize="13sp" />
 
+        <Button
+            android:id="@+id/denyButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_primary"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/circularstd"
+            android:gravity="center"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:text="Deny"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar_transitionDetail"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_gravity="center"
         android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:theme="@style/progressColor"
         android:visibility="invisible" />
 

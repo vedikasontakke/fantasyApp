@@ -1,4 +1,4 @@
-package com.example.fantansyapp.ui.image
+package com.example.fantansyapp.ui.addSlide
 
 import android.app.Activity
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.fantansyapp.R
 import com.example.fantansyapp.data.repositories.LimitsRepository
 import com.example.fantansyapp.databinding.FragmentSliderBinding
@@ -19,7 +20,7 @@ import okhttp3.RequestBody
 import java.io.FileNotFoundException
 import java.io.InputStream
 
-class SliderFragment : Fragment(R.layout.fragment_slider) {
+class AddSlide : Fragment(R.layout.fragment_slider) {
     val binding: FragmentSliderBinding by viewBinding()
     var body: MultipartBody.Part? = null
 
@@ -35,32 +36,38 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
         }
 
         binding.doneButton.setOnClickListener {
+            var link = binding.etLink.text.toString()
+            if (link.isNullOrEmpty()){
+               link = " "
+            }
+
             if (body != null) {
 
-                uploadImage()
+                uploadImage(link)
 
             } else {
-                requireView().snackBar("Please Choose Image to Upload First")
+                binding.root.snackBar("Please Choose Image to Upload First")
             }
         }
     }
 
-    private fun uploadImage() {
+    private fun uploadImage(link: String) {
         viewLifecycleOwner.lifecycleScope.launch {
 
             binding.progressBarSlider.visible(true)
 
             try {
-                val result = LimitsRepository(requireContext()).uploadSliderImage(body!!)
+                val result = LimitsRepository(requireContext()).uploadSliderImage(body!!,link)
                 if (result.result == "success") {
-                    requireView().snackBar("Image Uploaded Successfully")
+                    binding.root.snackBar("Image Uploaded Successfully")
+                    findNavController().popBackStack()
                     binding.image.setImageURI(null)
                 }
 
                 binding.progressBarSlider.visible(false)
 
             } catch (e: Exception) {
-                requireView().snackBar(e.message.toString())
+                binding.root.snackBar(e.message.toString())
 
                 binding.progressBarSlider.visible(false)
 
@@ -78,7 +85,7 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        binding.progressBarSlider.visible(true)
+
 
 
         if (requestCode == PICK_PHOTO && resultCode == Activity.RESULT_OK) {
@@ -89,18 +96,17 @@ class SliderFragment : Fragment(R.layout.fragment_slider) {
 
                     val inputStream: InputStream? = context?.contentResolver?.openInputStream(it.data!!)
                     inputStream?.let {
-                        val requestBody =  RequestBody.create("image/*".toMediaTypeOrNull(), inputStream.readBytes())
+                        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), inputStream.readBytes())
                         body = MultipartBody.Part.createFormData("image", "image", requestBody)
 
                     }
                 }
 
-                binding.progressBarSlider.visible(false)
 
             } catch (e: FileNotFoundException) {
                 e.printStackTrace()
 
-                binding.progressBarSlider.visible(false)
+                binding.root.snackBar("File Not Found Plase choose another")
 
             }
         }

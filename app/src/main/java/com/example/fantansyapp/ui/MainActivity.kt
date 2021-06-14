@@ -36,7 +36,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.userDetailsFragment -> {
                     bottomNavigation.visibility = View.GONE
+                } R.id.historyFragment -> {
+                    bottomNavigation.visibility = View.GONE
                 }
+
                 else -> {
                     bottomNavigation.visibility = View.VISIBLE
                 }

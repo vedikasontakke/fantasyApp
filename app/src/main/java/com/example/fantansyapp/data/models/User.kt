@@ -1,6 +1,7 @@
 package com.example.fantansyapp.data.models
 
 import android.os.Parcelable
+import com.example.fantansyapp.utils.Constants.Companion.IMAGE_URL
 import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class User(
@@ -25,7 +26,7 @@ data class User(
         val planExpDate: String,
 ) : Parcelable {
 
-    val getImage get() = "http://192.168.43.146/Learing/earning_app/profiles/"+profileImage
+    val getImage get() = "$IMAGE_URL$profileImage"
 
 }
 

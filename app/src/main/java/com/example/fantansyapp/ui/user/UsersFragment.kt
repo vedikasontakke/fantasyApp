@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -34,6 +36,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
     }
 
     private fun initData() {
+        (requireContext() as AppCompatActivity).setSupportActionBar(binding.toolbar)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
@@ -51,7 +54,7 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
 
                 showDataInRecyclerView(usersList)
             } catch (e: Exception) {
-                requireView().snackBar(e.stackTraceToString())
+                binding.root.snackBar(e.stackTraceToString())
                 Log.e(TAG, "getAllUser: ${e.printStackTrace()}")
                 binding.progressBarUser.visible(false)
             }
@@ -86,16 +89,38 @@ class UsersFragment : Fragment(R.layout.fragment_user), UsersAdapter.OnUserClick
             viewLifecycleOwner.lifecycleScope.launch {
                 try {
                     binding.recyclerView.scrollToPosition(0)
+                    binding.progressBarUser.visible(true)
                     val searchUsers = userRepo.searchAllUsers(query)
 
                     showDataInRecyclerView(searchUsers)
+
                 } catch (e: Exception) {
-                    requireView().snackBar(e.message.toString())
+                    binding.root.snackBar(e.message.toString())
+                    binding.progressBarUser.visible(false)
                 }
             }
 
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         super.onOptionsItemSelected(item)
+        if(item.itemId == R.id.action_sort){
+            viewLifecycleOwner.lifecycleScope.launch {
+                try {
+                    binding.progressBarUser.visible(true)
+                    binding.recyclerView.scrollToPosition(0)
+                    val searchUsers = userRepo.getAllUserAccordingToCoins()
+
+                    showDataInRecyclerView(searchUsers)
+                } catch (e: Exception) {
+                    binding.progressBarUser.visible(false)
+                    binding.root.snackBar(e.message.toString())
+                }
+            }
+        }
+        return true
     }
 
 

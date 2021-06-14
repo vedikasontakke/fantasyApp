@@ -32,12 +32,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private fun getLimits() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val limits = LimitsRepository(requireContext()).getLimits()
 
-            binding.spinnerLimit.setText(limits.spinner)
-            binding.guessLimit.setText(limits.guess)
-            binding.referLimit.setText(limits.refer)
-            binding.scratchLimit.setText(limits.scratch)
+            binding.progressBarSetting.visible(true)
+            try {
+                val limits = LimitsRepository(requireContext()).getLimits()
+
+                binding.spinnerLimit.setText(limits.spinner)
+                binding.guessLimit.setText(limits.guess)
+                binding.referLimit.setText(limits.refer)
+                binding.scratchLimit.setText(limits.scratch)
+                binding.progressBarSetting.visible(false)
+            } catch (e: Exception) {
+
+
+                try {
+                    binding.root.snackBar(e.message.toString())
+
+                    binding.progressBarSetting.visible(false)
+                } catch (e: Exception) {
+                }
+
+            }
         }
     }
 
@@ -50,32 +65,32 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
 
                 val spinner = binding.spinnerLimit.text
-                if (!spinner.isNullOrEmpty()){
+                if (!spinner.isNullOrEmpty()) {
 
 
                     val limit = Limit(
-                        spinner =  binding.spinnerLimit.text.toString(),
-                        refer =  binding.referLimit.text.toString(),
-                        scratch =  binding.scratchLimit.text.toString(),
-                        guess =  binding.guessLimit.text.toString()
+                            spinner = binding.spinnerLimit.text.toString(),
+                            refer = binding.referLimit.text.toString(),
+                            scratch = binding.scratchLimit.text.toString(),
+                            guess = binding.guessLimit.text.toString()
                     )
 
                     val result = LimitsRepository(requireContext()).updateLimits(limit)
 
-                    if(result.result == "success"){
-                        requireView().snackBar("Data Updated Successfully")
+                    if (result.result == "success") {
+                        binding.root.snackBar("Data Updated Successfully")
                     }
 
                     binding.progressBarSetting.visible(false)
 
-                }else{
-                    requireView().snackBar("Can not find data to Update")
+                } else {
+                    binding.root.snackBar("Can not find data to Update")
 
                     binding.progressBarSetting.visible(false)
 
                 }
             } catch (e: Exception) {
-                requireView().snackBar(e.message.toString())
+                binding.root.snackBar(e.message.toString())
 
                 binding.progressBarSetting.visible(false)
 

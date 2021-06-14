@@ -25,6 +25,8 @@ import com.bumptech.glide.Glide
 import com.example.fantansyapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.pd.chocobar.ChocoBar
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 
 fun BottomNavigationView.visiblity(boolean: Boolean) {
     visibility = if (boolean)
@@ -54,6 +56,9 @@ inline fun EditText.search(crossinline work: (query: String) -> Unit) {
 
     })
 }
+fun String.toMultipartReq() = this.toRequestBody("text/plain".toMediaTypeOrNull())
+
+
 
 inline fun EditText.getStringText():String{
     return this.text.toString().trim()

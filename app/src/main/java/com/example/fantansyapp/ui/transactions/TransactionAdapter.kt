@@ -33,10 +33,10 @@ class TransactionAdapter(private val transactionDataList: ArrayList<Transaction>
 
                 try {
                     val singleDate = transaction.date.split("-")
-                    val date = SimpleDateFormat("dd-MM-yyyy").parse(transaction.date)
+
                     year.text = singleDate[2]
                     this.date.text = singleDate[0]
-                    month.text = SimpleDateFormat("MMM").format(date)
+                    month.text = singleDate[1]
                 } catch (e:Exception) {
                     e.printStackTrace()
                 }

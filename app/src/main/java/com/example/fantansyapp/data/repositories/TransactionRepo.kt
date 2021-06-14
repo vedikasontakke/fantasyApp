@@ -8,16 +8,38 @@ import com.example.fantansyapp.data.network.SafeApiRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class TransactionRepo(val context: Context): SafeApiRequest() {
+class TransactionRepo(val context: Context) : SafeApiRequest() {
 
-    suspend fun getAllTransaction():ArrayList<Transaction> {
-        return withContext(Dispatchers.IO){
-            apiRequest { NetworkInterface.invoke().getAllTransactions()}
+    suspend fun getAllTransaction(type: String): ArrayList<Transaction> {
+        return if (type.equals("UNPAID")) {
+            withContext(Dispatchers.IO) {
+                apiRequest { NetworkInterface.invoke().getAllTransactions() }
+            }
+        } else if(type.equals("PAID")){
+            withContext(Dispatchers.IO) {
+                apiRequest { NetworkInterface.invoke().getAllPaidTransactions() }
+            }
+        }else{
+            withContext(Dispatchers.IO) {
+                apiRequest { NetworkInterface.invoke().getAllRejectedTransactions() }
+            }
+        }
+
+    }
+
+
+    suspend fun makeTransactionDone(id: String): Result {
+        return withContext(Dispatchers.IO) {
+            apiRequest { NetworkInterface.invoke().makeTractionCompleted(id) }
         }
     }
-    suspend fun makeTransactionDone(id:String):Result {
-        return withContext(Dispatchers.IO){
-            apiRequest { NetworkInterface.invoke().makeTractionCompleted(id)}
+
+    suspend fun denyTransaction(id: String): Result {
+        return withContext(Dispatchers.IO) {
+            apiRequest { NetworkInterface.invoke().denyTransaction(id) }
         }
     }
+
+
 }
+

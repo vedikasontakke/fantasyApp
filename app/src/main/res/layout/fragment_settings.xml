@@ -74,7 +74,7 @@
                     android:inputType="textCapWords"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="10"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 
@@ -115,7 +115,7 @@
                     android:inputType="textCapWords"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="10"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 
@@ -156,7 +156,7 @@
                     android:inputType="textCapWords"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="10"
+                    android:text="0"
 
                     android:textColor="@color/black"
                     android:textSize="26sp" />
@@ -177,9 +177,8 @@
                     android:layout_marginEnd="0dp"
                     android:drawablePadding="8dp"
                     android:fontFamily="@font/circularstd"
-
                     android:gravity="center_vertical"
-                    android:hint="Refer limit      :"
+                    android:hint="Refer Coins   :"
                     android:inputType="textCapWords"
                     android:padding="8dp"
                     android:singleLine="true"
@@ -199,7 +198,7 @@
                     android:inputType="textCapWords"
                     android:padding="8dp"
                     android:singleLine="true"
-                    android:text="250"
+                    android:text="0"
                     android:textColor="@color/black"
                     android:textSize="26sp" />
 
